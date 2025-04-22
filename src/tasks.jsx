@@ -3,6 +3,7 @@ import "./App.css"; // Assume CSS styles are defined here
 import "./tasks.css";
 import { DatePicker, Input, Button, Tabs, Table, Tag, Spin } from "antd";
 import dayjs from "dayjs";
+import { BACKEND_URL } from "./config";
 const { TabPane } = Tabs;
 const TASK_BUCKETS = {
   ongoing: "Ongoing",
@@ -97,7 +98,7 @@ function TaskBoard() {
   const fetchTasks = async () => {
     try {
       setGridLoading(true);
-      const res = await fetch("http://localhost:8000/api/tasks");
+      const res = await fetch(`${BACKEND_URL}/api/tasks`);
       const data = await res.json();
       setTasks(
         data.map((task) => ({
@@ -116,7 +117,7 @@ function TaskBoard() {
   const createTask = async () => {
     try {
       setLoading(true);
-      await fetch("http://localhost:8000/api/tasks", {
+      await fetch(`${BACKEND_URL}/api/tasks`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newTask),
@@ -133,7 +134,7 @@ function TaskBoard() {
   const markComplete = async (id) => {
     try {
       setGridLoading(true);
-      await fetch(`http://localhost:8000/api/tasks/${id}/complete`, {
+      await fetch(`${BACKEND_URL}/api/tasks/${id}/complete`, {
         method: "POST",
       });
       fetchTasks();
@@ -144,7 +145,7 @@ function TaskBoard() {
   const deleteTask = async (id) => {
     try {
       setGridLoading(true);
-      await fetch(`http://localhost:8000/api/tasks/${id}/delete`, {
+      await fetch(`${BACKEND_URL}/api/tasks/${id}/delete`, {
         method: "DELETE",
       });
       fetchTasks();
