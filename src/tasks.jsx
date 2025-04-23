@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css"; // Assume CSS styles are defined here
 import "./tasks.css";
 import { DatePicker, Input, Button, Tabs, Table, Tag, Spin } from "antd";
+import { CheckOutlined, DeleteOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import { BACKEND_URL } from "./config";
 const { TabPane } = Tabs;
@@ -79,13 +80,9 @@ function TaskBoard() {
       render: (_, task) => (
         <>
           {task.status !== "success" && task.status !== "failure" && (
-            <Button type="link" onClick={() => onComplete(task.id)}>
-              Complete
-            </Button>
+            <CheckOutlined type="link" onClick={() => onComplete(task.id)} />
           )}
-          <Button danger type="link" onClick={() => onDelete(task.id)}>
-            Delete
-          </Button>
+          <DeleteOutlined type="link" onClick={() => onDelete(task.id)} />
         </>
       ),
     },
@@ -98,7 +95,7 @@ function TaskBoard() {
   const fetchTasks = async () => {
     try {
       setGridLoading(true);
-      const res = await fetch(`${BACKEND_URL}/api/tasks`);
+      const res = await fetch(`http://127.0.0.1:8000/api/tasks`);
       const data = await res.json();
       setTasks(
         data.map((task) => ({
