@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css"; // Assume CSS styles are defined here
 import "./tasks.css";
-import { DatePicker, Input, Button, Tabs, Table, Tag, Spin } from "antd";
+import { DatePicker, Input, Button, Tabs, Table, Tag, Spin, Space } from "antd";
 import { CheckOutlined, DeleteOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import { BACKEND_URL } from "./config";
@@ -79,10 +79,12 @@ function TaskBoard() {
       key: "actions",
       render: (_, task) => (
         <>
-          {task.status !== "success" && task.status !== "failure" && (
-            <CheckOutlined type="link" onClick={() => onComplete(task.id)} />
-          )}
-          <DeleteOutlined type="link" onClick={() => onDelete(task.id)} />
+          <Space>
+            {task.status !== "success" && task.status !== "failure" && (
+              <CheckOutlined type="link" onClick={() => onComplete(task.id)} />
+            )}
+            <DeleteOutlined type="link" onClick={() => onDelete(task.id)} />
+          </Space>
         </>
       ),
     },
