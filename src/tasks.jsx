@@ -95,7 +95,7 @@ function TaskBoard() {
   const fetchTasks = async () => {
     try {
       setGridLoading(true);
-      const res = await fetch(`http://127.0.0.1:8000/api/tasks`);
+      const res = await fetch(`${BACKEND_URL}/api/tasks`);
       const data = await res.json();
       setTasks(
         data.map((task) => ({
