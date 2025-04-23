@@ -1,4 +1,6 @@
 # frontend deployed link
+Built with:
+React + Ant Design + CSS for frontend (deployed on Vercel)
 vercel- https://todo-frontend-omega-five.vercel.app/
 
 To run locally-
